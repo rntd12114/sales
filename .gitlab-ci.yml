@@ -1,0 +1,107 @@
+variables:
+  vendor_dir: /home/lib/client-yii/
+  url: $CI_API_V4_URL/projects/$CI_PROJECT_ID/repository/archive?sha=$CI_COMMIT_SHORT_SHA&private_token=$token
+
+stages:
+  - install
+
+dev-job:
+  extends: .base_job
+  variables:
+    exchange: /bin/true
+  environment:
+    name: dev
+  tags:
+    - dev
+  only:
+    refs:
+      - master
+    changes:
+      - composer.json
+      - composer.lock
+
+dev-job2:
+  extends: .base_job
+  variables:
+    exchange: /bin/false
+  only:
+    refs:
+      - master
+  except:
+    changes:
+      - composer.json
+      - composer.lock
+  environment:
+    name: dev
+  tags:
+    - dev
+
+pro_job:
+  extends: .base_job
+  variables:
+    exchange: /bin/true
+    env_dev: /bin/false
+    env_str: Production
+    host: sales.rntd.cn
+    path: /home/release/build/client-yii/$CI_COMMIT_SHORT_SHA
+    link: /home/release/client/client-yii
+  when: manual
+  only:
+    refs:
+      - release
+    changes:
+      - composer.json
+      - composer.lock
+  environment:
+    name: production
+  tags:
+    - release
+
+pro_job2:
+  extends: .base_job
+  variables:
+    exchange: /bin/false
+    env_dev: /bin/false
+    env_str: Production
+    host: sales.rntd.cn
+    path: /home/release/build/client-yii/$CI_COMMIT_SHORT_SHA
+    link: /home/release/client/client-yii
+  when: manual
+  only:
+    refs:
+      - release
+  except:
+    changes:
+      - composer.json
+      - composer.lock
+  environment:
+    name: production
+  tags:
+    - release
+
+
+
+.base_job:
+  stage: install
+  variables:
+    GIT_STRATEGY: none
+    exchange: /bin/false
+    env_dev: /bin/true
+    env_str: Development
+    host: dev-agent.rntd.org
+    path: /home/dev/build/client-yii/$CI_COMMIT_SHORT_SHA
+    link: /home/dev/client/client-yii
+  script:
+    - mkdir -p $path
+    - cd $path
+    - curl -o archive.tar.gz $url
+    - tar -zxf archive.tar.gz --strip-components=1 || (cat archive.tar.gz;echo $url;exit 1)
+    - cp -r ${vendor_dir}vendor ./
+    - $exchange && composer install --prefer-dist --no-progress --no-interaction --optimize-autoloader --no-suggest --no-dev
+    - $exchange && cp -r vendor $vendor_dir
+    - php init --env=$env_str --overwrite=y
+    - php yii migrate --interactive 0
+    - ln -s -f -T $path $link
+    - php clear_opcache.php
+    - cd ../
+    - ls -lt|awk -F ' ' '{if(NR>20)print $NF}'| xargs rm -rf {}

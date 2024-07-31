@@ -1,0 +1,70 @@
+# 登录
+POST  {{host-pd}}/login/login
+Content-Type: application/x-www-form-urlencoded
+
+username=测试&password=123456
+
+### 注册新用户
+POST {{host-pd}}/user-manage/add-agent-user
+Content-Type: application/x-www-form-urlencoded
+Cookie: {{cookie}}
+
+username=试测试测试测试测试11&password=123456&role=1&state=1&agent_id=agent26211
+
+### 注册新用户
+POST {{host-pd}}/user-manage/add
+Content-Type: application/x-www-form-urlencoded
+Cookie: {{cookie}}
+
+username=试测试测试测试测试11&password=123456&name=测试&team_id=8&role=1
+
+### 修改个人信息
+POST {{host-pd}}/user-manage/update
+Content-Type: application/x-www-form-urlencoded
+Cookie: {{cookie}}
+
+id=26&password=123456123123123123123
+
+###退出
+POST {{host-pd}}/login/out
+Content-Type: application/x-www-form-urlencoded
+Cookie: {{cookie}}
+
+
+###菜单列表
+POST {{host-pd}}/department-manage/menu
+Content-Type: application/x-www-form-urlencoded
+Cookie: {{cookie}}
+
+###用户列表
+POST {{host-pd}}/user-manage/list
+Content-Type: application/x-www-form-urlencoded
+Cookie: {{cookie}}
+
+current_page=1&page_size=20
+
+
+###获取单个用户的信息
+POST {{host-pd}}/user-manage/get
+Content-Type: application/x-www-form-urlencoded
+Cookie: {{cookie}}
+
+id=3
+
+
+
+###用户更新
+POST {{host-pd}}/user-manage/update
+Content-Type: application/x-www-form-urlencoded
+Cookie: {{cookie}}
+
+id=26&password=asdasd&state=1
+
+###修改密码
+POST {{host-pd}}/user-manage/update-pass
+Content-Type: application/x-www-form-urlencoded
+
+old_pass=123456&new_pass=asdasd
+
+###
+
