@@ -47,7 +47,7 @@
 
 4、把目录移动到网站的根目录下
 
-5、我nginx安装到/usr/local/nginx，php安装到/usr/local/php，所以要修改yii的初始化文件
+5、推荐nginx安装到/usr/local/nginx，php安装到/usr/local/php，所以要修改yii的初始化文件
 >> vim /usr/local/nginx/html/advanced/init
 
 把第一行  #!/usr/bin/env php
@@ -56,12 +56,16 @@
 
 6、运行init
 
-7、这时/usr/local/nginx/html/advanced/frontend/web/目录就生成了index.php和index-test.php两个文件
+7、部署代码到服务器，将本项目/sales/api/目录部署到web目录下
 
-8、修改index-test.php，第三行，添加一个客户端IP
+8、通过 yii migrate 命令初始化数据表
+
+9、这时/usr/local/nginx/html/advanced/frontend/web/目录就生成了index.php和index-test.php两个文件
+
+10、修改index-test.php，第三行，添加一个客户端IP
 如果用服务器访问自身的index-test.php是不需要修改的，但使用客户端去访问就需要添加客户端的ip了。
 
-9、在浏览器中访问，我把/usr/local/nginx/html/advanced/frontend/web/设为网站的根目录，所以直接输入网址就能访问了。看到下图表示成功
+11、在浏览器中访问，把/usr/local/nginx/html/advanced/frontend/web/设为网站的根目录，所以直接输入网址就能访问了。看到下图表示成功
 ```
 ### windows服务器
 
