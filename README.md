@@ -1,6 +1,6 @@
 <a href="https://sales.rntd.cn/"><img src="./docs/首页.png" width="1180" height="480" alt="lazaytools logo"></a>
 
-## 体验地址
+# 体验地址
 - 域名：https://sales.rntd.cn/
 - 账号：测试
 - 密码：123456
@@ -8,14 +8,14 @@
 
 
 
-## 部署说明
+# 部署说明
 
-# 前端部署
+## 前端部署
 
 > A Vue.js project
 - 需要的环境：node.js v12.13.1
 
-## Build Setup
+# Build Setup
 ``` bash
 # 进入前端目录
 >> cd client-vue
@@ -34,9 +34,9 @@
 ```
 
 
-## 服务端
+## 服务端部署
 
-# linux服务器
+### linux服务器
 
 ``` bash
 1、先搭建LNMP平台，
@@ -63,7 +63,7 @@
 
 9、在浏览器中访问，我把/usr/local/nginx/html/advanced/frontend/web/设为网站的根目录，所以直接输入网址就能访问了。看到下图表示成功
 ```
-# windows服务器
+### windows服务器
 
 ``` bash
 1、安装wamp2.4以上的版本。
