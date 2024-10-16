@@ -15,7 +15,7 @@
 > A Vue.js project
 - 需要的环境：node.js v12.13.1
 
-# Build Setup
+### Build Setup
 ``` bash
 # 进入前端目录
 >> cd client-vue
