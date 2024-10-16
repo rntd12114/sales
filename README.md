@@ -1,4 +1,4 @@
-<a href="https://sales.rntd.cn/"><img src="./docs/首页.png" width="180" height="180" alt="lazaytools logo"></a>
+<a href="https://sales.rntd.cn/"><img src="./docs/首页.png" width="1180" height="480" alt="lazaytools logo"></a>
 
 ## 体验地址
 - 域名：https://sales.rntd.cn/
@@ -9,15 +9,16 @@
 
 
 ## 部署说明
-# 前端
-- 目录为/sales/client-vue/
-- 需要的环境：node.js
+
+# 前端部署
 
 > A Vue.js project
+- 需要的环境：node.js
 
->> cd client-vue
 ## Build Setup
 ``` bash
+# 进入前端目录
+>> cd client-vue
 # 安装依赖项
 >> npm install
 
