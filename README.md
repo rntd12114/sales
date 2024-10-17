@@ -35,50 +35,47 @@
 
 
 ## 服务端部署
+数据库配置：
+
 
 ### linux服务器
+- 需要的环境： php环境、php-fpm、mysql数据库、nginx
 
 ``` bash
-1、先搭建LNMP平台，
+#上传./api 目录到服务器任意目录下，如/home/appdev
+#修改数据库连接：
+>> vim ./api/common/config/main.php
 
-2、到http://www.yiiframework.com/download/  ，下载yii-advanced-app-2.0.6.tgz包
+		'db' => [
+            'class' => 'yii\db\Connection',
+            'dsn' => 'mysql',
+            'username' => 'username',
+            'password' => 'password',
+            'charset' => 'utf8mb4',
+            'attributes' => [
+                PDO::ATTR_STRINGIFY_FETCHES => false,
+                PDO::ATTR_EMULATE_PREPARES => false,
+            ],
+        ],
+		
+#yii框架初始化
+>> cd ./api/
+>> ./init
 
-3、解包
+#数据结构初始化
+>> cd ./api/
+>> ./yii migrate
 
-4、把目录移动到网站的根目录下
+#配置nginx，‘/home/appdev’部分请与第一步中上传的目录保持一致
+>> vim ./nginx.cof
+location ~ \.php$ {
+        root           /home/appdev/api/frontend/web/;
+        fastcgi_pass   127.0.0.1:9000;
+        fastcgi_index  index.php;
+        fastcgi_param  SCRIPT_FILENAME  $document_root$fastcgi_script_name;
+        include        fastcgi_params;
+    }
 
-5、推荐nginx安装到/usr/local/nginx，php安装到/usr/local/php，所以要修改yii的初始化文件
->> vim /usr/local/nginx/html/advanced/init
-
-把第一行  #!/usr/bin/env php
-
-改成   #!/usr/local/php/bin/php
-
-6、运行init
-
-7、部署代码到服务器，将本项目/sales/api/目录部署到web目录下
-
-8、通过 yii migrate 命令初始化数据表
-
-9、这时/usr/local/nginx/html/advanced/frontend/web/目录就生成了index.php和index-test.php两个文件
-
-10、修改index-test.php，第三行，添加一个客户端IP
-如果用服务器访问自身的index-test.php是不需要修改的，但使用客户端去访问就需要添加客户端的ip了。
-
-11、在浏览器中访问，把/usr/local/nginx/html/advanced/frontend/web/设为网站的根目录，所以直接输入网址就能访问了。看到下图表示成功
-```
-### windows服务器
-
-``` bash
-1、安装wamp2.4以上的版本。
-
-2、到http://www.yiiframework.com/download/  ，下载yii-advanced-app-2.0.6.tgz包
-
-3、解包
-
-4、把目录移动到网站的根目录下
-
-5、运行init.bat
-剩余步骤与linux一样
-
+#重启nginx
+>> nginx -s reload
 ```

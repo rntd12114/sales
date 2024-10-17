@@ -13,9 +13,9 @@ return [
         ],
         'db' => [
             'class' => 'yii\db\Connection',
-            'dsn' => 'mysql:host=rm-2ze7i98y2z5xxo4r16o.mysql.rds.aliyuncs.com;dbname=db_client_dev',
-            'username' => 'rw_user',
-            'password' => 'pD2020rntd99#',
+            'dsn' => 'mysql',
+            'username' => 'username',
+            'password' => 'password',
             'charset' => 'utf8mb4',
             'attributes' => [
                 PDO::ATTR_STRINGIFY_FETCHES => false,

@@ -2,7 +2,7 @@
 return [
     'components' => [
         'db' => [
-            'dsn' => 'mysql:host=rm-2ze7i98y2z5xxo4r190130.mysql.rds.aliyuncs.com;dbname=db_client_dev',
+            'dsn' => 'mysql:',
         ],
         'mailer' => [
             'class' => 'yii\swiftmailer\Mailer',
