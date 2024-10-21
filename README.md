@@ -44,8 +44,8 @@
 ``` bash
 #上传./api 目录到服务器任意目录下，如/home/appdev
 #修改数据库连接：
->> vim ./api/common/config/main.php
-
+>> vim /home/appdev/api/common/config/main.php
+---------------------------------------------------------------
 		'db' => [
             'class' => 'yii\db\Connection',
             'dsn' => 'mysql',
@@ -57,17 +57,18 @@
                 PDO::ATTR_EMULATE_PREPARES => false,
             ],
         ],
-		
+----------------------------------------------------------------
 #yii框架初始化
->> cd ./api/
+>> cd /home/appdev/api/
 >> ./init
 
 #数据结构初始化
->> cd ./api/
+>> cd /home/appdev/api/
 >> ./yii migrate
 
 #配置nginx，‘/home/appdev’部分请与第一步中上传的目录保持一致
 >> vim ./nginx.cof
+----------------------------------------------------------------
 location ~ \.php$ {
         root           /home/appdev/api/frontend/web/;
         fastcgi_pass   127.0.0.1:9000;
@@ -75,7 +76,7 @@ location ~ \.php$ {
         fastcgi_param  SCRIPT_FILENAME  $document_root$fastcgi_script_name;
         include        fastcgi_params;
     }
-
+----------------------------------------------------------------
 #重启nginx
 >> nginx -s reload
 ```
